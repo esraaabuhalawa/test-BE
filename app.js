@@ -19,8 +19,6 @@ const fileStorage = multer.diskStorage({
     cb(null,  file.originalname);
   }
 });
-// CDN CSS
-const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 const fileFilter = (req, file, cb) => {
     if (
@@ -36,13 +34,7 @@ const fileFilter = (req, file, cb) => {
     
     // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
    // const specs = swaggerJsDoc(options);
-   //edit
-    //app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-    app.use(
-      "/api-docs",
-      swaggerUi.serve,
-      swaggerUi.setup(specs, { customCssUrl: CSS_URL })
-    );
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     app.use(bodyParser.json()); // application/json
   app.use(
     multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
